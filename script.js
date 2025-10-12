@@ -113,6 +113,50 @@ const updateTooltipPosition = (e, tooltip) => {
   tooltip.style.top = y + 'px';
 };
 
+// Parallax effect for hero section
+const handleParallax = () => {
+  const hero = document.querySelector('.hero');
+  const shapes = document.querySelectorAll('.floating-shape');
+  
+  if (!hero) return;
+  
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const heroHeight = hero.offsetHeight;
+    
+    if (scrolled < heroHeight) {
+      shapes.forEach((shape, index) => {
+        const speed = 0.3 + (index * 0.1);
+        const yPos = -(scrolled * speed);
+        shape.style.transform = `translateY(${yPos}px)`;
+      });
+    }
+  }, { passive: true });
+};
+
+// Mouse move effect for hero
+const handleMouseMove = () => {
+  const hero = document.querySelector('.hero');
+  const shapes = document.querySelectorAll('.floating-shape');
+  
+  if (!hero) return;
+  
+  hero.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    
+    const xPercent = (clientX / innerWidth - 0.5) * 2;
+    const yPercent = (clientY / innerHeight - 0.5) * 2;
+    
+    shapes.forEach((shape, index) => {
+      const speed = 10 + (index * 5);
+      const x = xPercent * speed;
+      const y = yPercent * speed;
+      shape.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  });
+};
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   // Setup fade-in animations
@@ -128,4 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Setup tooltip positioning
   handleTooltipPosition();
+  
+  // Setup parallax effect
+  handleParallax();
+  
+  // Setup mouse move effect
+  handleMouseMove();
 });
