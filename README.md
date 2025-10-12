@@ -54,26 +54,44 @@
 
 <table>
 <tr>
-<td align="center" width="25%">
-<img src="https://via.placeholder.com/80/0a0a0f/0a0a0f" alt="bg-primary"/><br/>
-<code>#0a0a0f</code><br/>
-<sub>Основной фон</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://via.placeholder.com/80/13131a/13131a" alt="bg-secondary"/><br/>
-<code>#13131a</code><br/>
-<sub>Вторичный фон</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://via.placeholder.com/80/6366f1/6366f1" alt="accent"/><br/>
-<code>#6366f1</code><br/>
-<sub>Акцент</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://via.placeholder.com/80/e4e4e7/e4e4e7" alt="text-primary"/><br/>
-<code>#e4e4e7</code><br/>
-<sub>Текст</sub>
-</td>
+<td><img src="https://readme-swatches.vercel.app/0a0a0f?style=round"/></td>
+<td><code>#0a0a0f</code></td>
+<td>Основной фон</td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/13131a?style=round"/></td>
+<td><code>#13131a</code></td>
+<td>Вторичный фон</td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/1a1a24?style=round"/></td>
+<td><code>#1a1a24</code></td>
+<td>Третичный фон</td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/6366f1?style=round"/></td>
+<td><code>#6366f1</code></td>
+<td><strong>Акцентный цвет</strong></td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/4f46e5?style=round"/></td>
+<td><code>#4f46e5</code></td>
+<td>Акцент hover</td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/e4e4e7?style=round"/></td>
+<td><code>#e4e4e7</code></td>
+<td>Основной текст</td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/a1a1aa?style=round"/></td>
+<td><code>#a1a1aa</code></td>
+<td>Вторичный текст</td>
+</tr>
+<tr>
+<td><img src="https://readme-swatches.vercel.app/71717a?style=round"/></td>
+<td><code>#71717a</code></td>
+<td>Приглушенный текст</td>
 </tr>
 </table>
 
