@@ -55,24 +55,62 @@ const updateActiveNav = () => {
   });
 };
 
-// Tooltip position handler
+// Tooltip follows cursor
 const handleTooltipPosition = () => {
   const tooltipElements = document.querySelectorAll('[data-tooltip]');
   
   tooltipElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-      const rect = element.getBoundingClientRect();
-      const spaceAbove = rect.top;
-      const spaceBelow = window.innerHeight - rect.bottom;
+    let tooltip = null;
+    
+    element.addEventListener('mouseenter', (e) => {
+      // Create tooltip element
+      tooltip = document.createElement('div');
+      tooltip.className = 'custom-tooltip';
+      tooltip.textContent = element.getAttribute('data-tooltip');
+      document.body.appendChild(tooltip);
       
-      // If not enough space above, show tooltip below
-      if (spaceAbove < 100) {
-        element.classList.add('tooltip-bottom');
-      } else {
-        element.classList.remove('tooltip-bottom');
+      // Position tooltip near cursor
+      updateTooltipPosition(e, tooltip);
+    });
+    
+    element.addEventListener('mousemove', (e) => {
+      if (tooltip) {
+        updateTooltipPosition(e, tooltip);
+      }
+    });
+    
+    element.addEventListener('mouseleave', () => {
+      if (tooltip) {
+        tooltip.remove();
+        tooltip = null;
       }
     });
   });
+};
+
+const updateTooltipPosition = (e, tooltip) => {
+  const offsetX = 10;
+  const offsetY = 20;
+  
+  // Always position tooltip below and to the right of cursor
+  let x = e.clientX + offsetX;
+  let y = e.clientY + offsetY;
+  
+  // Check if tooltip goes off screen
+  const tooltipRect = tooltip.getBoundingClientRect();
+  
+  // If goes off right edge, show on left side of cursor
+  if (x + tooltipRect.width > window.innerWidth - 10) {
+    x = e.clientX - tooltipRect.width - offsetX;
+  }
+  
+  // If goes off bottom edge, show above cursor
+  if (y + tooltipRect.height > window.innerHeight - 10) {
+    y = e.clientY - tooltipRect.height - offsetY;
+  }
+  
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
 };
 
 // Initialize on DOM load
