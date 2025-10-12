@@ -251,8 +251,6 @@ style.css
 
 <div align="center">
 
-**Сделано с ❤️ и ☕**
-
 [⬆ Наверх](#-portfolio-website)
 
 </div>
