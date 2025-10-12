@@ -9,7 +9,7 @@ const SCROLL_OFFSET = 80;
 const SCROLL_THRESHOLD = 200;
 
 // Селекторы элементов для анимации появления
-const ANIMATION_SELECTORS = '.timeline-item, .project-card, .tech-card, .contact-card';
+const ANIMATION_SELECTORS = '.timeline-item, .project-card, .tech-card, .learning-card, .contact-card';
 
 
 /* ============================================
