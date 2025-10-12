@@ -55,6 +55,26 @@ const updateActiveNav = () => {
   });
 };
 
+// Tooltip position handler
+const handleTooltipPosition = () => {
+  const tooltipElements = document.querySelectorAll('[data-tooltip]');
+  
+  tooltipElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+      const rect = element.getBoundingClientRect();
+      const spaceAbove = rect.top;
+      const spaceBelow = window.innerHeight - rect.bottom;
+      
+      // If not enough space above, show tooltip below
+      if (spaceAbove < 100) {
+        element.classList.add('tooltip-bottom');
+      } else {
+        element.classList.remove('tooltip-bottom');
+      }
+    });
+  });
+};
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   // Setup fade-in animations
@@ -67,4 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Setup scroll listener
   window.addEventListener('scroll', updateActiveNav, { passive: true });
+  
+  // Setup tooltip positioning
+  handleTooltipPosition();
 });
