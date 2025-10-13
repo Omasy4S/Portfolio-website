@@ -1032,12 +1032,15 @@ body {
   border-left: 3px solid var(--accent);
 }
 
-/* Hero Stats - 4 columns */
+/* Hero Stats - 3 columns */
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 768px) {

@@ -245,6 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Отслеживание скролла для активной навигации
   window.addEventListener('scroll', updateActiveNav, { passive: true });
   
+  // 2.1. Вызываем сразу для установки начального состояния
+  updateActiveNav();
+  
   // 3. Инициализация тултипов
   handleTooltipPosition();
   
@@ -253,4 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 5. Запуск параллакс эффекта при движении мыши
   handleMouseMove();
+});
+
+// Дополнительная проверка после полной загрузки страницы (для GitHub Pages)
+window.addEventListener('load', () => {
+  updateActiveNav();
 });
