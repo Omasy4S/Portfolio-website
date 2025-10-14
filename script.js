@@ -364,6 +364,116 @@ const animateTimeline = () => {
 };
 
 /**
+ * Particle Network - интерактивная сеть частиц
+ * Создаёт красивый фон с соединяющимися частицами
+ */
+const initParticleNetwork = () => {
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  
+  // Настройка размера canvas
+  const resizeCanvas = () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  };
+  
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  
+  // Класс частицы
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2 + 1;
+    }
+    
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      
+      // Отскок от границ
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      
+      // Градиент для свечения
+      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 2);
+      gradient.addColorStop(0, 'rgba(99, 102, 241, 1)');
+      gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      
+      // Яркое ядро
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(168, 85, 247, 0.9)';
+      ctx.fill();
+    }
+  }
+  
+  // Создание частиц (больше для более насыщенного эффекта)
+  const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 8000), 150);
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+  
+  // Пересоздание частиц при изменении размера
+  window.addEventListener('resize', () => {
+    particles = [];
+    const newCount = Math.min(Math.floor((canvas.width * canvas.height) / 8000), 150);
+    for (let i = 0; i < newCount; i++) {
+      particles.push(new Particle());
+    }
+  });
+  
+  // Соединение частиц линиями
+  const connectParticles = () => {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - distance / 120)})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  };
+  
+  // Анимация
+  const animate = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(particle => {
+      particle.update();
+      particle.draw();
+    });
+    
+    connectParticles();
+    requestAnimationFrame(animate);
+  };
+  
+  animate();
+};
+
+/**
  * Инициализация всех функций после загрузки DOM
  * Запускается когда HTML полностью загружен и готов к работе
  */
@@ -408,6 +518,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 9. Анимация timeline
   animateTimeline();
+  
+  // 10. Particle Network фон
+  initParticleNetwork();
 });
 
 // Дополнительная проверка после полной загрузки страницы (для GitHub Pages)

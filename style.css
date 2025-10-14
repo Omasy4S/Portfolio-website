@@ -282,56 +282,22 @@ body {
   }
 }
 
-/* Animated dots */
+/* Particle Network Canvas */
 .particles {
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  pointer-events: none;
 }
 
-.particles::before,
-.particles::after {
-  content: '';
+#particleCanvas {
   position: absolute;
-  width: 3px;
-  height: 3px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 
-    100px 200px 0 rgba(99, 102, 241, 0.4),
-    300px 100px 0 rgba(168, 85, 247, 0.4),
-    500px 300px 0 rgba(99, 102, 241, 0.3),
-    700px 150px 0 rgba(168, 85, 247, 0.3),
-    200px 400px 0 rgba(59, 130, 246, 0.4),
-    600px 450px 0 rgba(99, 102, 241, 0.3),
-    400px 250px 0 rgba(168, 85, 247, 0.4),
-    800px 350px 0 rgba(59, 130, 246, 0.3);
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.particles::after {
-  animation-delay: 1.5s;
-  box-shadow: 
-    150px 250px 0 rgba(168, 85, 247, 0.4),
-    350px 150px 0 rgba(99, 102, 241, 0.3),
-    550px 350px 0 rgba(59, 130, 246, 0.4),
-    750px 200px 0 rgba(99, 102, 241, 0.3),
-    250px 450px 0 rgba(168, 85, 247, 0.4),
-    650px 500px 0 rgba(59, 130, 246, 0.3),
-    450px 300px 0 rgba(99, 102, 241, 0.4),
-    850px 400px 0 rgba(168, 85, 247, 0.3);
-}
-
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .hero-content {
