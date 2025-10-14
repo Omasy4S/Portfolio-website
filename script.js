@@ -9,7 +9,7 @@ const SCROLL_OFFSET = 80;
 const SCROLL_THRESHOLD = 200;
 
 // Селекторы элементов для анимации появления
-const ANIMATION_SELECTORS = '.timeline-item, .project-card, .tech-card, .learning-card, .contact-card';
+const ANIMATION_SELECTORS = '.project-card, .tech-card, .learning-card, .contact-card';
 
 
 /* ============================================
@@ -32,10 +32,7 @@ const handleSmoothScroll = (e) => {
   }
 };
 
-// Инициализация плавной прокрутки для всех якорных ссылок
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', handleSmoothScroll);
-});
+// Инициализация плавной прокрутки будет в DOMContentLoaded
 
 
 /* ============================================
@@ -228,10 +225,154 @@ const handleMouseMove = () => {
    ============================================ */
 
 /**
+ * Добавляет эффект скролла для navbar
+ * При прокрутке страницы navbar становится более непрозрачным
+ */
+const handleNavbarScroll = () => {
+  const navbar = document.querySelector('.navbar');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }, { passive: true });
+};
+
+/**
+ * Управляет кнопкой "Наверх"
+ * Показывает/скрывает кнопку в зависимости от позиции скролла
+ */
+const handleScrollToTop = () => {
+  const scrollToTopBtn = document.getElementById('scrollToTop');
+  
+  if (!scrollToTopBtn) return;
+  
+  // Показываем/скрываем кнопку при скролле
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollToTopBtn.classList.add('visible');
+    } else {
+      scrollToTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+  
+  // Обработчик клика - плавная прокрутка наверх
+  scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+};
+
+/**
+ * Анимированные счётчики для статистики
+ * Числа плавно считаются от 0 до целевого значения
+ */
+const animateCounters = () => {
+  const stats = document.querySelectorAll('.stat-value');
+  let animated = false;
+  
+  const animateValue = (element, start, end, duration, suffix = '') => {
+    const range = end - start;
+    const increment = range / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= end) {
+        element.textContent = end + suffix;
+        clearInterval(timer);
+      } else {
+        element.textContent = Math.floor(current) + suffix;
+      }
+    }, 16);
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        stats.forEach(stat => {
+          const text = stat.textContent;
+          const value = parseInt(text);
+          const suffix = text.replace(/[0-9]/g, '');
+          animateValue(stat, 0, value, 2000, suffix);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  const statsSection = document.querySelector('.hero-stats');
+  if (statsSection) observer.observe(statsSection);
+};
+
+/**
+ * Ripple эффект для кнопок
+ * Создаёт волновой эффект при клике
+ */
+const addRippleEffect = () => {
+  const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .contact-btn');
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        left: ${x}px;
+        top: ${y}px;
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+      `;
+      
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+};
+
+/**
+ * Анимация появления элементов timeline
+ */
+const animateTimeline = () => {
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 150);
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  timelineItems.forEach(item => observer.observe(item));
+};
+
+/**
  * Инициализация всех функций после загрузки DOM
  * Запускается когда HTML полностью загружен и готов к работе
  */
 document.addEventListener('DOMContentLoaded', () => {
+  
+  // 0. Инициализация плавной прокрутки
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', handleSmoothScroll);
+  });
   
   // 1. Настройка анимаций появления элементов
   const animatedElements = document.querySelectorAll(ANIMATION_SELECTORS);
@@ -244,18 +385,29 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 2. Отслеживание скролла для активной навигации
   window.addEventListener('scroll', updateActiveNav, { passive: true });
-  
-  // 2.1. Вызываем сразу для установки начального состояния
-  updateActiveNav();
+  updateActiveNav(); // Вызываем сразу для установки начального состояния
   
   // 3. Инициализация тултипов
   handleTooltipPosition();
   
-  // 4. Запуск параллакс эффекта при скролле
+  // 4. Запуск параллакс эффектов
   handleParallax();
-  
-  // 5. Запуск параллакс эффекта при движении мыши
   handleMouseMove();
+  
+  // 5. Эффект скролла для navbar
+  handleNavbarScroll();
+  
+  // 6. Кнопка "Наверх"
+  handleScrollToTop();
+  
+  // 7. Анимированные счётчики
+  animateCounters();
+  
+  // 8. Ripple эффект для кнопок
+  addRippleEffect();
+  
+  // 9. Анимация timeline
+  animateTimeline();
 });
 
 // Дополнительная проверка после полной загрузки страницы (для GitHub Pages)

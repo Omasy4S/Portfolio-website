@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Omyy - Fullstack-разработчик с опытом создания веб и мобильных приложений. Специализация: .NET, React, Flutter, TypeScript.">
+  <meta name="keywords" content="fullstack разработчик, веб-разработка, мобильная разработка, .NET, React, Flutter">
+  <meta name="author" content="Omyy">
+  <meta property="og:title" content="Omyy · Fullstack-разработчик">
+  <meta property="og:description" content="Портфолио fullstack-разработчика. Создание современных веб и мобильных приложений.">
+  <meta property="og:type" content="website">
   <title>Omyy · Fullstack-разработчик</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5.3">
+  <link rel="stylesheet" href="style.css?v=7.0">
 </head>
 <body>
   <div class="grain"></div>
@@ -213,14 +219,14 @@
 
   <section id="projects" class="section">
     <div class="container">
-      <h2 class="section-title">Избранные проекты</h2>
+      <h2 class="section-title">Проекты</h2>
       <div class="projects-grid">
         
         <!-- Portfolio Website -->
-        <a href="https://github.com/Omasy4S/Portfolio-website" target="_blank" class="project-card featured">
-          <div class="project-badge">⭐</div>
+        <a href="https://github.com/Omasy4S/Portfolio-website" target="_blank" class="project-card">
           <div class="project-header">
             <h3>Portfolio Website</h3>
+            <span class="project-category">Web</span>
           </div>
           <p class="project-description">
             Современное портфолио с анимациями, параллакс эффектами и интерактивными элементами. Демонстрация навыков работы с чистым JavaScript и CSS.
@@ -239,10 +245,10 @@
         </a>
 
         <!-- TangleApp -->
-        <a href="https://github.com/Omasy4S/TangleApp" target="_blank" class="project-card featured">
-          <div class="project-badge">⭐</div>
+        <a href="https://github.com/Omasy4S/TangleApp" target="_blank" class="project-card">
           <div class="project-header">
             <h3>TangleApp</h3>
+            <span class="project-category">Mobile</span>
           </div>
           <p class="project-description">
             Полнофункциональное Android-приложение для вязания — бесплатная альтернатива платным аналогам. Создано по запросу пользователя и получило положительные отзывы сообщества.
@@ -264,10 +270,10 @@
         </a>
 
         <!-- TaskMaster Pro -->
-        <a href="https://github.com/Omasy4S/task-manager-pro" target="_blank" class="project-card featured">
-          <div class="project-badge">⭐</div>
+        <a href="https://github.com/Omasy4S/task-manager-pro" target="_blank" class="project-card">
           <div class="project-header">
             <h3>TaskMaster Pro</h3>
+            <span class="project-category">Full-Stack</span>
           </div>
           <p class="project-description">
             Full-stack веб-приложение для управления задачами с акцентом на UX/UI. Демонстрация навыков работы с современным стеком и real-time технологиями.
@@ -288,10 +294,36 @@
           </ul>
         </a>
 
+        <!-- Snake Game V2 -->
+        <a href="https://github.com/Omasy4S/snake-game-v2" target="_blank" class="project-card">
+          <div class="project-header">
+            <h3>Snake Game V2 - Ultimate Edition</h3>
+            <span class="project-category">Game</span>
+          </div>
+          <p class="project-description">
+            Современная змейка с продвинутыми возможностями: 6+ power-ups, система магазина и монет, достижения, два режима игры и полная кастомизация внешнего вида.
+          </p>
+          <div class="project-tech">
+            <span data-tooltip="Vanilla JavaScript ES6+ для игровой логики">JavaScript</span>
+            <span data-tooltip="Canvas API для отрисовки игры">HTML5 Canvas</span>
+            <span data-tooltip="Современные CSS анимации и эффекты">CSS3</span>
+            <span data-tooltip="Сохранение прогресса в браузере">LocalStorage</span>
+          </div>
+          <ul class="project-features">
+            <li>🎮 Два режима: классика и с препятствиями</li>
+            <li>⚡ 6 уникальных power-ups с эффектами</li>
+            <li>🛒 Магазин с 6 скинами, 5 темами и эффектами</li>
+            <li>🏆 Система достижений и прогрессии</li>
+            <li>💰 Монеты и система наград</li>
+            <li>📱 Адаптивный дизайн с виртуальным D-pad</li>
+          </ul>
+        </a>
+
         <!-- Time Tracker -->
         <a href="https://github.com/Omasy4S/time_tracker" target="_blank" class="project-card">
           <div class="project-header">
             <h3>Time Tracker</h3>
+            <span class="project-category">Mobile</span>
           </div>
           <p class="project-description">
             Кроссплатформенное Flutter-приложение для отслеживания рабочих смен с JWT авторизацией и Clean Architecture.
@@ -313,6 +345,7 @@
         <a href="https://github.com/Omasy4S/vue-project" target="_blank" class="project-card">
           <div class="project-header">
             <h3>Account Manager</h3>
+            <span class="project-category">Web</span>
           </div>
           <p class="project-description">
             Система управления учетными записями на Vue 3 с TypeScript. Демонстрация работы с Pinia Store, валидацией и компонентной архитектурой.
@@ -336,6 +369,7 @@
         <a href="https://github.com/Omasy4S/TestTelegramBot" target="_blank" class="project-card">
           <div class="project-header">
             <h3>Modern Telegram Bot</h3>
+            <span class="project-category">Bot</span>
           </div>
           <p class="project-description">
             Многофункциональный Telegram-бот с викториной, статистикой и развлекательными функциями. Построен на Clean Architecture с применением SOLID принципов.
@@ -417,6 +451,13 @@
     </div>
   </footer>
 
-  <script src="script.js?v=5.1"></script>
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" id="scrollToTop" aria-label="Наверх">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="script.js?v=7.0"></script>
 </body>
 </html>
