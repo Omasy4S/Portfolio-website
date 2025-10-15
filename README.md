@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎨 Portfolio Website v7.0
+# 🎨 Portfolio Website
 
 ### Профессиональное портфолио fullstack-разработчика
 
