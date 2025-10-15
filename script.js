@@ -169,53 +169,54 @@ const updateTooltipPosition = (e, tooltip) => {
  * Параллакс эффект при скролле для hero секции
  * Плавающие фигуры двигаются с разной скоростью при прокрутке
  */
+let mouseX = 0;
+let mouseY = 0;
+let scrollY = 0;
+
 const handleParallax = () => {
   const hero = document.querySelector('.hero');
   const shapes = document.querySelectorAll('.floating-shape');
   
   if (!hero) return;
   
+  const updateShapes = () => {
+    shapes.forEach((shape, index) => {
+      const scrollSpeed = 0.3 + (index * 0.1);
+      const mouseSpeed = 10 + (index * 5);
+      
+      const scrollYPos = -(scrollY * scrollSpeed);
+      const mouseXPos = mouseX * mouseSpeed;
+      const mouseYPos = mouseY * mouseSpeed;
+      
+      // Комбинируем оба эффекта
+      shape.style.transform = `translate(${mouseXPos}px, ${scrollYPos + mouseYPos}px)`;
+    });
+  };
+  
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
+    scrollY = window.scrollY;
     const heroHeight = hero.offsetHeight;
     
-    // Применяем параллакс только пока hero секция видна
-    if (scrolled < heroHeight) {
-      shapes.forEach((shape, index) => {
-        // Каждая фигура двигается с разной скоростью
-        const speed = 0.3 + (index * 0.1);
-        const yPos = -(scrolled * speed);
-        shape.style.transform = `translateY(${yPos}px)`;
-      });
+    if (scrollY < heroHeight) {
+      updateShapes();
     }
-  }, { passive: true }); // passive для лучшей производительности
-};
-
-/**
- * Параллакс эффект при движении мыши
- * Плавающие фигуры следуют за курсором с разной интенсивностью
- */
-const handleMouseMove = () => {
-  const hero = document.querySelector('.hero');
-  const shapes = document.querySelectorAll('.floating-shape');
-  
-  if (!hero) return;
+  }, { passive: true });
   
   hero.addEventListener('mousemove', (e) => {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     
-    // Вычисляем позицию курсора относительно центра экрана (-1 до 1)
-    const xPercent = (clientX / innerWidth - 0.5) * 2;
-    const yPercent = (clientY / innerHeight - 0.5) * 2;
+    mouseX = (clientX / innerWidth - 0.5) * 2;
+    mouseY = (clientY / innerHeight - 0.5) * 2;
     
-    // Каждая фигура реагирует с разной интенсивностью
-    shapes.forEach((shape, index) => {
-      const speed = 10 + (index * 5); // Увеличивающаяся скорость для каждой фигуры
-      const x = xPercent * speed;
-      const y = yPercent * speed;
-      shape.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    updateShapes();
+  });
+  
+  // Сброс при уходе курсора
+  hero.addEventListener('mouseleave', () => {
+    mouseX = 0;
+    mouseY = 0;
+    updateShapes();
   });
 };
 
@@ -277,18 +278,26 @@ const animateCounters = () => {
   
   const animateValue = (element, start, end, duration, suffix = '') => {
     const range = end - start;
-    const increment = range / (duration / 16);
-    let current = start;
+    const startTime = performance.now();
     
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= end) {
-        element.textContent = end + suffix;
-        clearInterval(timer);
+    const updateCounter = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function для плавности
+      const easeOutQuad = progress * (2 - progress);
+      const current = Math.floor(start + range * easeOutQuad);
+      
+      element.textContent = current + suffix;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
       } else {
-        element.textContent = Math.floor(current) + suffix;
+        element.textContent = end + suffix;
       }
-    }, 16);
+    };
+    
+    requestAnimationFrame(updateCounter);
   };
   
   const observer = new IntersectionObserver((entries) => {
@@ -301,6 +310,7 @@ const animateCounters = () => {
           const suffix = text.replace(/[0-9]/g, '');
           animateValue(stat, 0, value, 2000, suffix);
         });
+        observer.disconnect();
       }
     });
   }, { threshold: 0.5 });
@@ -317,6 +327,12 @@ const addRippleEffect = () => {
   const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .contact-btn');
   
   buttons.forEach(button => {
+    // Устанавливаем position: relative для корректного позиционирования
+    if (getComputedStyle(button).position === 'static') {
+      button.style.position = 'relative';
+    }
+    button.style.overflow = 'hidden';
+    
     button.addEventListener('click', function(e) {
       const ripple = document.createElement('span');
       const rect = this.getBoundingClientRect();
@@ -335,6 +351,7 @@ const addRippleEffect = () => {
         transform: scale(0);
         animation: ripple 0.6s ease-out;
         pointer-events: none;
+        z-index: 1;
       `;
       
       this.appendChild(ripple);
@@ -351,11 +368,13 @@ const animateTimeline = () => {
   const timelineItems = document.querySelectorAll('.timeline-item');
   
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        const index = Array.from(timelineItems).indexOf(entry.target);
         setTimeout(() => {
           entry.target.classList.add('visible');
         }, index * 150);
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
@@ -422,19 +441,29 @@ const initParticleNetwork = () => {
     }
   }
   
-  // Создание частиц (больше для более насыщенного эффекта)
-  const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 8000), 150);
+  // Создание частиц с оптимизацией для производительности
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile 
+    ? Math.min(Math.floor((canvas.width * canvas.height) / 25000), 40)
+    : Math.min(Math.floor((canvas.width * canvas.height) / 15000), 80);
   for (let i = 0; i < particleCount; i++) {
     particles.push(new Particle());
   }
   
-  // Пересоздание частиц при изменении размера
+  // Пересоздание частиц при изменении размера (с debounce)
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    particles = [];
-    const newCount = Math.min(Math.floor((canvas.width * canvas.height) / 8000), 150);
-    for (let i = 0; i < newCount; i++) {
-      particles.push(new Particle());
-    }
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      particles = [];
+      const isMobile = window.innerWidth < 768;
+      const newCount = isMobile 
+        ? Math.min(Math.floor((canvas.width * canvas.height) / 25000), 40)
+        : Math.min(Math.floor((canvas.width * canvas.height) / 15000), 80);
+      for (let i = 0; i < newCount; i++) {
+        particles.push(new Particle());
+      }
+    }, 250);
   });
   
   // Соединение частиц линиями
@@ -445,10 +474,10 @@ const initParticleNetwork = () => {
         const dy = particles[i].y - particles[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 120) {
+        if (distance < 150) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - distance / 120)})`;
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - distance / 150)})`;
+          ctx.lineWidth = 0.8;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.stroke();
@@ -502,7 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 4. Запуск параллакс эффектов
   handleParallax();
-  handleMouseMove();
   
   // 5. Эффект скролла для navbar
   handleNavbarScroll();
