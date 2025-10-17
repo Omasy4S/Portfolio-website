@@ -67,7 +67,7 @@
             <div class="stat-label">Года опыта</div>
           </div>
           <div class="stat">
-            <div class="stat-value">20+</div>
+            <div class="stat-value">25+</div>
             <div class="stat-label">Технологий</div>
           </div>
           <div class="stat">
@@ -154,6 +154,8 @@
           <div class="tech-tags">
             <span class="tech-tag" data-tooltip="Современный язык программирования от Microsoft">C#</span>
             <span class="tech-tag" data-tooltip="Платформа для разработки приложений на C#">.NET</span>
+            <span class="tech-tag" data-tooltip="Серверный язык программирования">PHP</span>
+            <span class="tech-tag" data-tooltip="PHP фреймворк для enterprise приложений">Symfony</span>
             <span class="tech-tag" data-tooltip="JavaScript runtime для серверной разработки">Node.js</span>
             <span class="tech-tag" data-tooltip="Минималистичный веб-фреймворк для Node.js">Express.js</span>
             <span class="tech-tag" data-tooltip="ORM для работы с базами данных в .NET">Entity Framework</span>
@@ -172,6 +174,7 @@
           <div class="tech-tags">
             <span class="tech-tag" data-tooltip="Библиотека для создания пользовательских интерфейсов">React</span>
             <span class="tech-tag" data-tooltip="React-фреймворк с SSR и статической генерацией">Next.js</span>
+            <span class="tech-tag" data-tooltip="Прогрессивный JavaScript фреймворк">Vue.js</span>
             <span class="tech-tag" data-tooltip="Типизированный JavaScript для больших проектов">TypeScript</span>
             <span class="tech-tag" data-tooltip="Полнофункциональный фреймворк от Google">Angular</span>
             <span class="tech-tag" data-tooltip="Фреймворк для создания веб-приложений на C#">Blazor</span>
@@ -218,6 +221,9 @@
         <div class="additional-tech-title">Дополнительные навыки</div>
         <div class="additional-tech-list">
           <span data-tooltip="Библиотека компонентов для создания отчетов и UI">DevExpress</span>
+          <span data-tooltip="E-commerce платформа на базе Symfony">Shopware 6</span>
+          <span data-tooltip="Менеджер зависимостей для PHP">Composer</span>
+          <span data-tooltip="Стандарт оформления кода PHP">PSR-12</span>
           <span data-tooltip="Распределенная платформа потоковой передачи данных">Apache Kafka</span>
           <span data-tooltip="Инструмент для документирования REST API">Swagger</span>
           <span data-tooltip="Архитектурный подход для разделения бизнес-логики">Clean Architecture</span>
@@ -238,11 +244,13 @@
       <h2 class="section-title">Личные проекты</h2>
       <div class="projects-grid">
         
+        <!-- ========== PORTFOLIO ========== -->
+        
         <!-- Portfolio Website -->
         <a href="https://github.com/Omasy4S/Portfolio-website" target="_blank" class="project-card">
           <div class="project-header">
             <h3>Portfolio Website</h3>
-            <span class="project-category">Web</span>
+            <span class="project-category">Portfolio</span>
           </div>
           <p class="project-description">
             Современное портфолио с анимациями, параллакс эффектами и интерактивными элементами. Демонстрация навыков работы с чистым JavaScript и CSS.
@@ -259,6 +267,8 @@
             <li>📱 Полностью адаптивный дизайн</li>
           </ul>
         </a>
+
+        <!-- ========== BACKEND ========== -->
 
         <!-- Booking System -->
         <a href="https://github.com/Omasy4S/booking-system" target="_blank" class="project-card">
@@ -285,30 +295,58 @@
           </ul>
         </a>
 
-        <!-- TangleApp -->
-        <a href="https://github.com/Omasy4S/TangleApp" target="_blank" class="project-card">
+        <!-- Channel Product Description -->
+        <a href="https://github.com/Omasy4S/ChannelProductDescription" target="_blank" class="project-card">
           <div class="project-header">
-            <h3>TangleApp</h3>
-            <span class="project-category">Mobile</span>
+            <h3>Channel Product Description Plugin</h3>
+            <span class="project-category">Backend</span>
           </div>
           <p class="project-description">
-            Полнофункциональное Android-приложение для вязания — бесплатная альтернатива платным аналогам. Создано по запросу пользователя и получило положительные отзывы сообщества.
+            Плагин для Shopware 6, позволяющий управлять описаниями товаров для разных каналов продаж и языков. Компактный код (~270 строк) с чистой архитектурой и автоматической синхронизацией.
           </p>
           <div class="project-tech">
-            <span data-tooltip="Современный язык программирования для Android разработки от JetBrains">Kotlin</span>
-            <span data-tooltip="Мобильная операционная система от Google">Android</span>
-            <span data-tooltip="Легковесная встраиваемая реляционная база данных">SQLite</span>
-            <span data-tooltip="JavaScript Interface для связи Native и Web">WebView</span>
+            <span data-tooltip="Серверный язык программирования">PHP 8.1+</span>
+            <span data-tooltip="E-commerce платформа на Symfony">Shopware 6</span>
+            <span data-tooltip="PHP фреймворк">Symfony</span>
+            <span data-tooltip="Менеджер зависимостей для PHP">Composer</span>
           </div>
           <ul class="project-features">
-            <li>🎯 Неограниченное количество проектов с группировкой</li>
-            <li>🔢 Умные счётчики с автосохранением и историей</li>
-            <li>📐 Калькулятор размеров на основе образца</li>
-            <li>📸 Галерея схем (фото + PDF) с полноэкранным просмотром</li>
-            <li>🎨 Полная кастомизация цветов и иконок</li>
-            <li>📲 Виджеты трёх размеров для домашнего экрана</li>
+            <li>🏗️ Чистая архитектура (Services, Subscribers, DI)</li>
+            <li>🌍 Мультиязычность с автоопределением языка</li>
+            <li>🔄 Автосинхронизация при добавлении каналов</li>
+            <li>📦 Fallback механизм для пустых описаний</li>
+            <li>⚡ Кастомные поля для каждого канала/языка</li>
+            <li>🎯 Компактный код с соблюдением SOLID и PSR-12</li>
           </ul>
         </a>
+
+        <!-- ========== FRONTEND ========== -->
+
+        <!-- Vue Account Manager -->
+        <a href="https://github.com/Omasy4S/vue-project" target="_blank" class="project-card">
+          <div class="project-header">
+            <h3>Account Manager</h3>
+            <span class="project-category">Frontend</span>
+          </div>
+          <p class="project-description">
+            Система управления учетными записями на Vue 3 с TypeScript. Демонстрация работы с Pinia Store, валидацией и компонентной архитектурой.
+          </p>
+          <div class="project-tech">
+            <span data-tooltip="Прогрессивный JavaScript фреймворк">Vue 3</span>
+            <span data-tooltip="Типизированный JavaScript">TypeScript</span>
+            <span data-tooltip="State management для Vue">Pinia</span>
+            <span data-tooltip="Компонентная библиотека для Vue 3">Element Plus</span>
+          </div>
+          <ul class="project-features">
+            <li>🔄 Реактивность через Pinia Store</li>
+            <li>💾 Автосохранение в localStorage</li>
+            <li>✅ Валидация в реальном времени</li>
+            <li>🎨 Современный UI с Element Plus</li>
+            <li>📝 Полная типизация TypeScript</li>
+          </ul>
+        </a>
+
+        <!-- ========== FULL-STACK ========== -->
 
         <!-- TaskMaster Pro -->
         <a href="https://github.com/Omasy4S/task-manager-pro" target="_blank" class="project-card">
@@ -335,28 +373,30 @@
           </ul>
         </a>
 
-        <!-- Snake Game V2 -->
-        <a href="https://github.com/Omasy4S/snake-game-v2" target="_blank" class="project-card">
+        <!-- ========== MOBILE ========== -->
+
+        <!-- TangleApp -->
+        <a href="https://github.com/Omasy4S/TangleApp" target="_blank" class="project-card">
           <div class="project-header">
-            <h3>Snake Game V2 - Ultimate Edition</h3>
-            <span class="project-category">Game</span>
+            <h3>TangleApp</h3>
+            <span class="project-category">Mobile</span>
           </div>
           <p class="project-description">
-            Современная змейка с продвинутыми возможностями: 6+ power-ups, система магазина и монет, достижения, два режима игры и полная кастомизация внешнего вида.
+            Полнофункциональное Android-приложение для вязания — бесплатная альтернатива платным аналогам. Создано по запросу пользователя и получило положительные отзывы сообщества.
           </p>
           <div class="project-tech">
-            <span data-tooltip="Vanilla JavaScript ES6+ для игровой логики">JavaScript</span>
-            <span data-tooltip="Canvas API для отрисовки игры">HTML5 Canvas</span>
-            <span data-tooltip="Современные CSS анимации и эффекты">CSS3</span>
-            <span data-tooltip="Сохранение прогресса в браузере">LocalStorage</span>
+            <span data-tooltip="Современный язык программирования для Android разработки от JetBrains">Kotlin</span>
+            <span data-tooltip="Мобильная операционная система от Google">Android</span>
+            <span data-tooltip="Легковесная встраиваемая реляционная база данных">SQLite</span>
+            <span data-tooltip="JavaScript Interface для связи Native и Web">WebView</span>
           </div>
           <ul class="project-features">
-            <li>🎮 Два режима: классика и с препятствиями</li>
-            <li>⚡ 6 уникальных power-ups с эффектами</li>
-            <li>🛒 Магазин с 6 скинами, 5 темами и эффектами</li>
-            <li>🏆 Система достижений и прогрессии</li>
-            <li>💰 Монеты и система наград</li>
-            <li>📱 Адаптивный дизайн с виртуальным D-pad</li>
+            <li>🎯 Неограниченное количество проектов с группировкой</li>
+            <li>🔢 Умные счётчики с автосохранением и историей</li>
+            <li>📐 Калькулятор размеров на основе образца</li>
+            <li>📸 Галерея схем (фото + PDF) с полноэкранным просмотром</li>
+            <li>🎨 Полная кастомизация цветов и иконок</li>
+            <li>📲 Виджеты трёх размеров для домашнего экрана</li>
           </ul>
         </a>
 
@@ -382,29 +422,34 @@
           </ul>
         </a>
 
-        <!-- Vue Account Manager -->
-        <a href="https://github.com/Omasy4S/vue-project" target="_blank" class="project-card">
+        <!-- ========== GAME ========== -->
+
+        <!-- Snake Game V2 -->
+        <a href="https://github.com/Omasy4S/snake-game-v2" target="_blank" class="project-card">
           <div class="project-header">
-            <h3>Account Manager</h3>
-            <span class="project-category">Web</span>
+            <h3>Snake Game V2 - Ultimate Edition</h3>
+            <span class="project-category">Game</span>
           </div>
           <p class="project-description">
-            Система управления учетными записями на Vue 3 с TypeScript. Демонстрация работы с Pinia Store, валидацией и компонентной архитектурой.
+            Современная змейка с продвинутыми возможностями: 6+ power-ups, система магазина и монет, достижения, два режима игры и полная кастомизация внешнего вида.
           </p>
           <div class="project-tech">
-            <span data-tooltip="Прогрессивный JavaScript фреймворк">Vue 3</span>
-            <span data-tooltip="Типизированный JavaScript">TypeScript</span>
-            <span data-tooltip="State management для Vue">Pinia</span>
-            <span data-tooltip="Компонентная библиотека для Vue 3">Element Plus</span>
+            <span data-tooltip="Vanilla JavaScript ES6+ для игровой логики">JavaScript</span>
+            <span data-tooltip="Canvas API для отрисовки игры">HTML5 Canvas</span>
+            <span data-tooltip="Современные CSS анимации и эффекты">CSS3</span>
+            <span data-tooltip="Сохранение прогресса в браузере">LocalStorage</span>
           </div>
           <ul class="project-features">
-            <li>🔄 Реактивность через Pinia Store</li>
-            <li>💾 Автосохранение в localStorage</li>
-            <li>✅ Валидация в реальном времени</li>
-            <li>🎨 Современный UI с Element Plus</li>
-            <li>📝 Полная типизация TypeScript</li>
+            <li>🎮 Два режима: классика и с препятствиями</li>
+            <li>⚡ 6 уникальных power-ups с эффектами</li>
+            <li>🛒 Магазин с 6 скинами, 5 темами и эффектами</li>
+            <li>🏆 Система достижений и прогрессии</li>
+            <li>💰 Монеты и система наград</li>
+            <li>📱 Адаптивный дизайн с виртуальным D-pad</li>
           </ul>
         </a>
+
+        <!-- ========== BOT ========== -->
 
         <!-- Telegram Bot -->
         <a href="https://github.com/Omasy4S/TestTelegramBot" target="_blank" class="project-card">
@@ -441,26 +486,54 @@
   <section id="learning" class="section section-alt">
     <div class="container">
       <h2 class="section-title">Что изучаю сейчас</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem; font-size: 1.1rem;">
+        Углубляю знания в Backend и Frontend разработке
+      </p>
       <div class="learning-grid">
         <div class="learning-card">
-          <div class="learning-icon">🏗️</div>
-          <h3>Архитектура</h3>
-          <p>Микросервисы, Domain-Driven Design, Event Sourcing</p>
+          <div class="learning-icon">🎯</div>
+          <h3>Backend Development</h3>
+          <p style="margin-bottom: 1.5rem;">Продвинутые техники серверной разработки</p>
+          <ul style="list-style: none; padding: 0; text-align: left;">
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">🏗️ Архитектура:</strong> Микросервисы, DDD, CQRS
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">⚡ Performance:</strong> Redis, Elasticsearch, Кэширование
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">📡 Real-time:</strong> WebSockets, SignalR, Server-Sent Events
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">🔐 Security:</strong> OAuth 2.0, JWT, API Security
+            </li>
+            <li style="padding: 0.5rem 0;">
+              <strong style="color: var(--accent);">📊 Data:</strong> GraphQL, Message Queues (RabbitMQ)
+            </li>
+          </ul>
         </div>
+
         <div class="learning-card">
-          <div class="learning-icon">🚀</div>
-          <h3>DevOps</h3>
-          <p>CI/CD пайплайны, Kubernetes, Infrastructure as Code</p>
-        </div>
-        <div class="learning-card">
-          <div class="learning-icon">📱</div>
-          <h3>Mobile</h3>
-          <p>Jetpack Compose, SwiftUI, React Native</p>
-        </div>
-        <div class="learning-card">
-          <div class="learning-icon">🤖</div>
-          <h3>AI/ML</h3>
-          <p>Интеграция AI в приложения, LangChain, OpenAI API</p>
+          <div class="learning-icon">✨</div>
+          <h3>Frontend Development</h3>
+          <p style="margin-bottom: 1.5rem;">Современные подходы к созданию UI/UX</p>
+          <ul style="list-style: none; padding: 0; text-align: left;">
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">⚛️ Frameworks:</strong> Next.js 15, Nuxt 3, Remix
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">🎨 Styling:</strong> CSS-in-JS, Styled Components, Sass
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">🔄 State:</strong> Zustand, Redux Toolkit, Jotai
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <strong style="color: var(--accent);">🧪 Testing:</strong> Vitest, Playwright, Testing Library
+            </li>
+            <li style="padding: 0.5rem 0;">
+              <strong style="color: var(--accent);">📦 Build:</strong> Vite, Turbopack, Module Federation
+            </li>
+          </ul>
         </div>
       </div>
     </div>
