@@ -71,7 +71,7 @@
             <div class="stat-label">Технологий</div>
           </div>
           <div class="stat">
-            <div class="stat-value">11+</div>
+            <div class="stat-value">12+</div>
             <div class="stat-label">Проектов</div>
           </div>
         </div>
@@ -241,12 +241,45 @@
   <section id="projects" class="section">
     <div class="container">
       <h2 class="section-title">Личные проекты</h2>
+      
+      <!-- Фильтры по категориям -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">
+          <span class="filter-icon">🌟</span>
+          Все проекты
+        </button>
+        <button class="filter-btn" data-filter="backend">
+          <span class="filter-icon">⚙️</span>
+          Backend
+        </button>
+        <button class="filter-btn" data-filter="frontend">
+          <span class="filter-icon">🎨</span>
+          Frontend
+        </button>
+        <button class="filter-btn" data-filter="fullstack">
+          <span class="filter-icon">🚀</span>
+          Full-Stack
+        </button>
+        <button class="filter-btn" data-filter="mobile">
+          <span class="filter-icon">📱</span>
+          Mobile
+        </button>
+        <button class="filter-btn" data-filter="game">
+          <span class="filter-icon">🎮</span>
+          Game
+        </button>
+        <button class="filter-btn" data-filter="bot">
+          <span class="filter-icon">🤖</span>
+          Bot
+        </button>
+      </div>
+
       <div class="projects-grid">
         
         <!-- ========== PORTFOLIO ========== -->
         
         <!-- Portfolio Website -->
-        <a href="https://github.com/Omasy4S/Portfolio-website" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/Portfolio-website" target="_blank" class="project-card" data-category="frontend">
           <div class="project-header">
             <h3>Portfolio Website</h3>
             <span class="project-category">Portfolio</span>
@@ -270,7 +303,7 @@
         <!-- ========== BACKEND ========== -->
 
         <!-- Booking System -->
-        <a href="https://github.com/Omasy4S/booking-system" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/booking-system" target="_blank" class="project-card" data-category="backend">
           <div class="project-header">
             <h3>Система бронирования мест</h3>
             <span class="project-category">Backend</span>
@@ -295,7 +328,7 @@
         </a>
 
         <!-- Channel Product Description -->
-        <a href="https://github.com/Omasy4S/ChannelProductDescription" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/ChannelProductDescription" target="_blank" class="project-card" data-category="backend">
           <div class="project-header">
             <h3>Channel Product Description Plugin</h3>
             <span class="project-category">Backend</span>
@@ -319,12 +352,38 @@
           </ul>
         </a>
 
+        <!-- Product Manager -->
+        <a href="https://github.com/Omasy4S/ProductManager" target="_blank" class="project-card" data-category="backend">
+          <div class="project-header">
+            <h3>Product Manager</h3>
+            <span class="project-category">Backend</span>
+          </div>
+          <p class="project-description">
+            Система управления продуктами на ASP.NET Core MVC с полным функционалом CRUD операций, поиском, сортировкой и статистикой. Демонстрация навыков работы с Entity Framework Core и современными паттернами разработки.
+          </p>
+          <div class="project-tech">
+            <span data-tooltip="Современный язык программирования от Microsoft">C# 12</span>
+            <span data-tooltip="Веб-фреймворк для создания MVC приложений">ASP.NET Core 8.0</span>
+            <span data-tooltip="ORM для работы с базами данных">Entity Framework Core 9.0</span>
+            <span data-tooltip="Легковесная встраиваемая база данных">SQLite</span>
+            <span data-tooltip="Компонентная библиотека для UI">Bootstrap 5</span>
+          </div>
+          <ul class="project-features">
+            <li>✅ CRUD операции с полной валидацией данных</li>
+            <li>🔍 Умный поиск по названию и описанию продуктов</li>
+            <li>📊 Сортировка по названию, цене и дате создания</li>
+            <li>📈 Автоматический расчет статистики по продуктам</li>
+            <li>⚡ Асинхронные операции с базой данных</li>
+            <li>🎨 Адаптивный дизайн с Bootstrap 5</li>
+          </ul>
+        </a>
+
         <!-- ========== FRONTEND ========== -->
 
         <!-- Movie Catalog -->
-        <a href="https://github.com/Omasy4S/movie-catalog" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/movie-catalog" target="_blank" class="project-card" data-category="frontend">
           <div class="project-header">
-            <h3>🎬 Каталог фильмов</h3>
+            <h3>Каталог фильмов</h3>
             <span class="project-category">Frontend</span>
           </div>
           <p class="project-description">
@@ -348,7 +407,7 @@
         </a>
 
         <!-- Vue Account Manager -->
-        <a href="https://github.com/Omasy4S/vue-project" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/vue-project" target="_blank" class="project-card" data-category="frontend">
           <div class="project-header">
             <h3>Account Manager</h3>
             <span class="project-category">Frontend</span>
@@ -374,7 +433,7 @@
         <!-- ========== FULL-STACK ========== -->
 
         <!-- TaskMaster Pro -->
-        <a href="https://github.com/Omasy4S/task-manager-pro" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/task-manager-pro" target="_blank" class="project-card" data-category="fullstack">
           <div class="project-header">
             <h3>TaskMaster Pro</h3>
             <span class="project-category">Full-Stack</span>
@@ -401,7 +460,7 @@
         <!-- ========== MOBILE ========== -->
 
         <!-- TangleApp -->
-        <a href="https://github.com/Omasy4S/TangleApp" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/TangleApp" target="_blank" class="project-card" data-category="mobile">
           <div class="project-header">
             <h3>TangleApp</h3>
             <span class="project-category">Mobile</span>
@@ -426,7 +485,7 @@
         </a>
 
         <!-- Time Tracker -->
-        <a href="https://github.com/Omasy4S/time_tracker" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/time_tracker" target="_blank" class="project-card" data-category="mobile">
           <div class="project-header">
             <h3>Time Tracker</h3>
             <span class="project-category">Mobile</span>
@@ -450,7 +509,7 @@
         <!-- ========== GAME ========== -->
 
         <!-- Snake Game V2 -->
-        <a href="https://github.com/Omasy4S/snake-game-v2" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/snake-game-v2" target="_blank" class="project-card" data-category="game">
           <div class="project-header">
             <h3>Snake Game V2 - Ultimate Edition</h3>
             <span class="project-category">Game</span>
@@ -477,7 +536,7 @@
         <!-- ========== BOT ========== -->
 
         <!-- Telegram Bot -->
-        <a href="https://github.com/Omasy4S/TestTelegramBot" target="_blank" class="project-card">
+        <a href="https://github.com/Omasy4S/TestTelegramBot" target="_blank" class="project-card" data-category="bot">
           <div class="project-header">
             <h3>Modern Telegram Bot</h3>
             <span class="project-category">Bot</span>
@@ -501,6 +560,17 @@
           </ul>
         </a>
 
+      </div>
+      
+      <!-- Кнопка показать все проекты -->
+      <div class="show-more-container">
+        <button class="show-more-btn" id="showMoreProjects">
+          <span class="show-more-text">Показать все проекты</span>
+          <span class="project-count">(еще <span id="hiddenCount">9</span>)</span>
+          <svg class="show-more-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </section>

@@ -502,6 +502,165 @@ const initParticleNetwork = () => {
   animate();
 };
 
+/* ============================================
+   ФИЛЬТРАЦИЯ ПРОЕКТОВ И ПОКАЗ ВСЕХ
+   ============================================ */
+
+/**
+ * Инициализация фильтрации проектов по категориям с ограничением показа
+ */
+const initProjectFilters = () => {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  const showMoreBtn = document.getElementById('showMoreProjects');
+  const showMoreContainer = document.querySelector('.show-more-container');
+  const hiddenCountSpan = document.getElementById('hiddenCount');
+  const showMoreText = showMoreBtn?.querySelector('.show-more-text');
+  const projectCount = showMoreBtn?.querySelector('.project-count');
+  
+  if (!filterButtons.length || !projectCards.length) return;
+  
+  let currentCategory = 'all';
+  let isExpanded = false;
+  const PROJECTS_LIMIT = 3; // Показываем первые 3 проекта
+  
+  /**
+   * Обновление видимости кнопки "Показать все" и счётчика
+   * @param {Array} visibleProjects - Массив видимых проектов в текущей категории
+   */
+  const updateShowMoreButton = (visibleProjects) => {
+    if (!showMoreBtn || !showMoreContainer) return;
+    
+    const hiddenProjectsCount = visibleProjects.length - PROJECTS_LIMIT;
+    
+    if (hiddenProjectsCount > 0) {
+      // Есть скрытые проекты - показываем кнопку
+      showMoreContainer.style.display = 'flex';
+      if (hiddenCountSpan) {
+        hiddenCountSpan.textContent = hiddenProjectsCount;
+      }
+      
+      // Обновляем текст в зависимости от состояния
+      if (isExpanded) {
+        if (showMoreText) showMoreText.textContent = 'Скрыть дополнительные';
+        if (projectCount) projectCount.style.display = 'none';
+        showMoreBtn.classList.add('expanded');
+      } else {
+        if (showMoreText) showMoreText.textContent = 'Показать все проекты';
+        if (projectCount) projectCount.style.display = 'inline';
+        showMoreBtn.classList.remove('expanded');
+      }
+    } else {
+      // Проектов 3 или меньше - скрываем кнопку
+      showMoreContainer.style.display = 'none';
+    }
+  };
+  
+  /**
+   * Фильтрация и отображение проектов
+   * @param {string} category - Категория для фильтрации
+   */
+  const filterProjects = (category) => {
+    currentCategory = category;
+    
+    // Получаем все проекты выбранной категории
+    let categoryProjects = Array.from(projectCards).filter(card => {
+      const cardCategory = card.getAttribute('data-category');
+      return category === 'all' || cardCategory === category;
+    });
+    
+    // Скрываем все проекты сначала
+    projectCards.forEach(card => {
+      card.classList.add('hidden');
+      card.classList.remove('show-all');
+    });
+    
+    // Показываем проекты текущей категории
+    categoryProjects.forEach((card, index) => {
+      card.classList.remove('hidden');
+      
+      // Первые 3 проекта показываем всегда
+      if (index < PROJECTS_LIMIT) {
+        card.classList.add('show-all');
+      } else if (isExpanded) {
+        // Остальные показываем только если раскрыто
+        card.classList.add('show-all');
+      } else {
+        card.classList.remove('show-all');
+      }
+      
+      // Анимация появления
+      card.style.animation = 'none';
+      setTimeout(() => {
+        card.style.animation = 'fadeIn 0.5s ease';
+      }, 10);
+    });
+    
+    // Обновляем кнопку "Показать все"
+    updateShowMoreButton(categoryProjects);
+  };
+  
+  /**
+   * Обработчик кнопки "Показать все"
+   */
+  const handleShowMore = () => {
+    isExpanded = !isExpanded;
+    
+    // Применяем текущий фильтр заново с учётом нового состояния
+    filterProjects(currentCategory);
+    
+    // Если скрываем - прокручиваем к началу проектов
+    if (!isExpanded) {
+      const projectsSection = document.querySelector('#projects');
+      if (projectsSection) {
+        window.scrollTo({
+          top: projectsSection.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+  
+  // Привязываем обработчик к кнопке
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', handleShowMore);
+  }
+  
+  // Обработчик клика по кнопкам фильтра
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Снимаем активный класс со всех кнопок
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      
+      // Добавляем активный класс к нажатой кнопке
+      button.classList.add('active');
+      
+      // Сбрасываем состояние раскрытия при смене категории
+      isExpanded = false;
+      
+      // Получаем категорию для фильтрации
+      const category = button.getAttribute('data-filter');
+      
+      // Применяем фильтр
+      filterProjects(category);
+      
+      // Плавная прокрутка к началу проектов
+      const projectsSection = document.querySelector('#projects');
+      if (projectsSection) {
+        const offset = 100;
+        window.scrollTo({
+          top: projectsSection.offsetTop - offset,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+  
+  // Инициализация - показываем все проекты (первые 3)
+  filterProjects('all');
+};
+
+
 /**
  * Инициализация всех функций после загрузки DOM
  * Запускается когда HTML полностью загружен и готов к работе
@@ -549,6 +708,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 10. Particle Network фон
   initParticleNetwork();
+  
+  // 11. Фильтрация проектов и показ всех
+  initProjectFilters();
 });
 
 // Дополнительная проверка после полной загрузки страницы (для GitHub Pages)
