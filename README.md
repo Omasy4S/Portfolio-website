@@ -10,7 +10,7 @@
 [![Version](https://img.shields.io/badge/version-7.0-blue.svg)](https://github.com/Omasy4S/Portfolio-website)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-[🌐 Посмотреть сайт](https://omasy4s.github.io/Portfolio-website/) • [📝 Документация](#-возможности) • [🚀 Запуск](#-быстрый-старт) • [📋 Changelog](IMPROVEMENTS.md)
+[🌐 Посмотреть сайт](https://omasy4s.github.io/Portfolio-website/) • [📝 Документация](#-возможности) • [🚀 Запуск](#-быстрый-старт)
 
 <img src="https://img.shields.io/badge/Performance-95+-brightgreen" alt="Performance">
 <img src="https://img.shields.io/badge/Accessibility-100-brightgreen" alt="Accessibility">
