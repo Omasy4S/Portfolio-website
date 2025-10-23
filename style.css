@@ -73,6 +73,17 @@ h1, h2, h3, h4, h5, h6, p, li {
   max-width: 100%;
 }
 
+/* Оптимизация производительности анимаций */
+.floating-shape,
+.project-card,
+.tech-card,
+.learning-card,
+.btn-primary,
+.btn-secondary,
+.contact-btn {
+  will-change: transform;
+}
+
 /* Анимация плавного появления страницы */
 @keyframes fadeIn {
   to {
@@ -515,6 +526,8 @@ h1, h2, h3, h4, h5, h6, p, li {
 /* Базовые стили для всех секций */
 .section {
   padding: 6rem 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 /* Альтернативный фон для секций */
@@ -929,117 +942,12 @@ h1, h2, h3, h4, h5, h6, p, li {
    ПРОЕКТЫ
    ============================================ */
 
-/* Фильтры проектов */
-.project-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-  padding: 1.5rem;
-  background: rgba(99, 102, 241, 0.04);
-  border: 1px solid rgba(99, 102, 241, 0.12);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-}
-
-.filter-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--bg-secondary);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 12px;
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.filter-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), rgba(99, 102, 241, 0.6));
-  transition: width 0.3s ease;
-  z-index: 0;
-}
-
-.filter-btn:hover::before {
-  width: 100%;
-}
-
-.filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--text-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
-}
-
-.filter-btn.active {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  border-color: var(--accent);
-  color: white;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-}
-
-.filter-btn.active::before {
-  width: 100%;
-}
-
-.filter-icon {
-  font-size: 1.2rem;
-  position: relative;
-  z-index: 1;
-}
-
-.filter-btn span,
-.filter-btn .filter-icon {
-  position: relative;
-  z-index: 1;
-}
-
-/* Адаптивность фильтров */
-@media (max-width: 768px) {
-  .project-filters {
-    gap: 0.75rem;
-    padding: 1rem;
-  }
-  
-  .filter-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-filters {
-    gap: 0.6rem;
-  }
-  
-  .filter-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
-  
-  .filter-icon {
-    font-size: 1rem;
-  }
-}
-
-/* Анимация появления/скрытия карточек */
+/* Анимация появления карточек */
 .project-card {
-  animation: fadeIn 0.5s ease;
+  animation: fadeInUp 0.5s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -1048,102 +956,6 @@ h1, h2, h3, h4, h5, h6, p, li {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Кнопка "Показать все проекты" */
-.show-more-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 3rem;
-}
-
-.show-more-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-  border: 2px solid rgba(99, 102, 241, 0.3);
-  border-radius: 50px;
-  color: var(--text-primary);
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.show-more-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
-
-.show-more-btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.show-more-btn:hover {
-  border-color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-}
-
-.show-more-btn:active {
-  transform: translateY(-1px);
-}
-
-.show-more-text,
-.project-count,
-.show-more-icon {
-  position: relative;
-  z-index: 1;
-}
-
-.project-count {
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.show-more-icon {
-  transition: transform 0.3s ease;
-}
-
-.show-more-btn:hover .show-more-icon {
-  transform: translateY(3px);
-}
-
-.show-more-btn.expanded .show-more-icon {
-  transform: rotate(180deg);
-}
-
-/* Отображение проектов через JS классы */
-.project-card {
-  display: block;
-}
-
-/* Скрываем карточки без класса show-all */
-.project-card:not(.show-all) {
-  display: none;
-}
-
-/* Приоритет для скрытия через фильтры */
-.project-card.hidden {
-  display: none !important;
-}
-
-/* Показываем карточки с классом show-all, если они не hidden */
-.project-card.show-all:not(.hidden) {
-  display: block;
 }
 
 /* Сетка карточек проектов */
